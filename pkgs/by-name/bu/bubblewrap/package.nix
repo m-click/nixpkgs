@@ -17,10 +17,11 @@ stdenv.mkDerivation rec {
   version = "0.11.0";
 
   src = fetchFromGitHub {
-    owner = "containers";
+    # See https://github.com/containers/bubblewrap/pull/586
+    owner = "aaruni96";
     repo = "bubblewrap";
-    rev = "v${version}";
-    hash = "sha256-8IDMLQPeO576N1lizVudXUmTV6hNOiowjzRpEWBsZ+U=";
+    rev = "e33e82fc556073332c93c9136c3159c708a158ed";
+    hash = "sha256-Tz0qnTWwD4DD0XkXBWEvZPAu4bWRqbjfNsDSPNkUeLA=";
   };
 
   postPatch = ''
