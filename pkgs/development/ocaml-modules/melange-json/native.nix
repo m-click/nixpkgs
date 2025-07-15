@@ -1,0 +1,20 @@
+{
+  buildDunePackage,
+  fetchurl,
+  melange-json,
+  ppxlib,
+  yojson,
+}:
+
+buildDunePackage {
+  pname = "melange-json-native";
+  inherit (melange-json) version src;
+  propagatedBuildInputs = [
+    ppxlib
+    yojson
+  ];
+  doCheck = false; # Fails due to missing "melange-jest", which in turn fails in command "npx jest" due to restricted network access
+  meta = melange-json.meta // {
+    description = "Compositional JSON encode/decode PPX for OCaml";
+  };
+}
