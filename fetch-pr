@@ -1,0 +1,19 @@
+#!/bin/sh
+set -Cefu
+
+if [ $# != 1 ]; then
+  echo "Usage: $0 PULL_REQUEST_NUMBER" >&2
+  exit 1
+fi
+pull_request_number=$1
+
+title=$(curl "https://api.github.com/repos/NixOS/nixpkgs/pulls/$pull_request_number" | jq -r .title)
+if [ "$title" = null ]; then
+  echo "Unable to fetch title of pull request" >&2
+  exit 1
+fi
+
+curl -L https://github.com/NixOS/nixpkgs/pull/"$pull_request_number".diff | git apply --index
+git commit -m "PR #$pull_request_number: $title"
+
+echo "Commit created."
