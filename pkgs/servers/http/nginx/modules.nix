@@ -77,8 +77,8 @@ let
             name = "acme";
             owner = "nginx";
             repo = "nginx-acme";
-            rev = "v0.1.1";
-            hash = "sha256-wnO+lDhtAvBYlaN9vg6spSsfqgHhueODeTkuWKBFswc=";
+            rev = "v0.2.0";
+            hash = "sha256-as+5cdwzpM4tvCxcgCIr877VJf4DduNTGRg29vChDnM=";
           };
           combined =
             runCommand "vendored-repo"
@@ -88,9 +88,6 @@ let
                 ];
                 cargoDeps = rustPlatform.importCargoLock {
                   lockFile = "${src}/Cargo.lock";
-                  outputHashes = {
-                    "nginx-sys-0.5.0" = "sha256-nyJofVcObsWLVe/bYCM0W7oeKwN4PlDe/ue74En+zAY=";
-                  };
                 };
               }
               ''
